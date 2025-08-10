@@ -2,7 +2,12 @@
 /// calculate the average speed of the journey.
 fn speed(start: u32, end: u32, time_elapsed: u32) -> u32 {
     // TODO: Panic with a custom message if `time_elapsed` is 0
-
+    let duration= end.checked_sub(start).unwrap_or_else(|| {
+        panic!("The duration is negative. That's impossible!");
+    });
+    if time_elapsed == 0 {
+        panic!("The journey took no time at all. That's impossible!");
+    }
     (end - start) / time_elapsed
 }
 
@@ -22,5 +27,11 @@ mod tests {
     #[should_panic(expected = "The journey took no time at all. That's impossible!")]
     fn by_zero() {
         speed(0, 10, 0);
+    }
+
+    #[test]
+    #[should_panic(expected = "The duration is negative. That's impossible!")]
+    fn duration_negative() {
+        speed(10, 0, 10);
     }
 }

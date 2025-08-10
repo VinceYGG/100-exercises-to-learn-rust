@@ -17,7 +17,11 @@
 // You can also find solutions to all exercises in the `solutions` git branch.
 fn greeting() -> &'static str {
     // TODO: fix me 👇
-    "I'm ready to __!"
+    "I'm ready to learn Rust!"
+}
+
+fn greetingWithName(name: &str) ->String{
+    format!("Hello, {}!", name)
 }
 
 // Your solutions will be automatically verified by a set of tests.
@@ -37,10 +41,15 @@ fn greeting() -> &'static str {
 // tested, not the tests themselves.
 #[cfg(test)]
 mod tests {
-    use crate::greeting;
+    use crate::{greeting, greetingWithName};
 
     #[test]
     fn test_welcome() {
         assert_eq!(greeting(), "I'm ready to learn Rust!");
+    }
+    
+    #[test]
+    fn test_welcome_with_name() {
+        assert_eq!(greetingWithName("Rustaceans"), "Hello, Rustaceans!");
     }
 }
